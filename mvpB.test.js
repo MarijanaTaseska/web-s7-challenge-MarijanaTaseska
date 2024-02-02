@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('Sprint 7 Challenge Learner Tests', () => {
@@ -29,8 +29,26 @@ describe('Sprint 7 Challenge Learner Tests', () => {
     [5] renders a text that reads "JavaScript is pretty awesome"
     [6] renders a text that includes "javaScript is pretty" (use exact = false)
   */
-  test('you can comment out this test', () => {
-    expect(true).toBe(false)
+
+//   test('you can comment out this test', () => {
+//     expect(true).toBe(false)
+//   })
+ })
+describe('sum function',()=>{
+  test('throws an erros for sum()', ()=>{
+    expect(()=>sum()).toThrowError('pass valid numbers')
+  })
+  test('throws an erros for sum(2,"seven")', ()=>{
+    expect(()=>sum(2,"seven")).toThrowError('pass valid numbers')
+  })
+  test('sum(1,3) to be 4', ()=>{
+    expect(sum(1,3)).toBe(4)
+  })
+  test('sum(1,2) to be 3', ()=>{
+    expect(sum(1,2)).toBe(3)
+  })
+  test('sum(10,3) to be 13', ()=>{
+    expect(sum(10,3)).toBe(13)
   })
 })
 
@@ -43,7 +61,38 @@ function sum(a, b) {
   return a + b
 }
 
-function HelloWorld() {
+describe('Integration test of Hello World Component',()=>{
+  
+  test('renders a link that reads "Home"',()=>{
+    render(<HelloWorld />)
+    expect(screen.queryByText('Home')).toBeInTheDocument()
+  })
+  test('renders a link that reads "About"',()=>{
+    render(<HelloWorld />)
+    expect(screen.queryByText('About')).toBeInTheDocument()
+  })
+  test('renders a link that reads "Blog"',()=>{
+    render(<HelloWorld />)
+    expect(screen.queryByText('Blog')).toBeInTheDocument()
+  })
+  test('renders a text that reads "The Truth"',()=>{
+    render(<HelloWorld />)
+    expect(screen.queryByText('The Truth')).toBeInTheDocument()
+  })
+  test('renders a text that reads "JavaScript is pretty awesome"',()=>{
+    render(<HelloWorld />)
+    expect(screen.queryByText('JavaScript is pretty awesome')).toBeInTheDocument()
+  })
+  test('renders a text that includes "javaScript is pretty"',()=>{
+    render(<HelloWorld />)
+    expect(screen.queryByText('javaScript is pretty',{exact:false})).toBeInTheDocument()
+
+  })
+})
+
+
+
+function HelloWorld(){
   return (
     <div>
       <h1>Hello World Component</h1>
